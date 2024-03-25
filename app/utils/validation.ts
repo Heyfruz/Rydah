@@ -31,3 +31,14 @@ export const registerValidationSchema = Yup.object().shape({
   name,
   password,
 });
+
+export const sellValidationSchema = Yup.object().shape({
+  category: Yup.object().required('Select a category').label('Category'),
+  description: Yup.string()
+    .required('Please enter a description')
+    .label('Description'),
+  imageUrl: Yup.string().required('Select an image to upload').label('Image'),
+  name: Yup.string().required('Enter a name').label('Name'),
+  price: Yup.string().required('Set item price').label('Price'),
+  sellerLocation: Yup.object().required('Select a location').label('Location'),
+});

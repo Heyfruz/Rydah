@@ -30,4 +30,32 @@ export const getTotalAmount = (
   return accumulator + a;
 };
 
+export const formatCurrency = (value: number | string): string => {
+  let amount =
+    typeof value === 'string' ? Number(value.replaceAll(',', '')) : value;
+
+  if (Number.isNaN(amount)) {
+    amount = 0;
+  }
+
+  return new Intl.NumberFormat('en-GB', {
+    currency: 'GBP',
+    minimumFractionDigits: 2,
+    style: 'currency',
+  }).format(amount);
+};
+
+export function generateRandomHexadecimal(length: number): string {
+  // Characters available for a hexadecimal string
+  const characters = '0123456789abcdef';
+  let result = '';
+  for (let i = 0; i < length; i++) {
+    // Generate a random index to pick a character from the characters string
+    const randomIndex = Math.floor(Math.random() * characters.length);
+    // Add the character to the result string
+    result += characters[randomIndex];
+  }
+  return result;
+}
+
 export * from './validation';

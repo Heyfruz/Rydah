@@ -17,4 +17,5 @@ export interface Props extends TextProps {
   lineHeight?: number;
   textTransform?: 'uppercase' | 'lowercase' | 'capitalize';
   textAlign?: 'left' | 'right' | 'center' | 'justify';
+  marginBottom?: number;
 }

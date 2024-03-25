@@ -1,9 +1,9 @@
 import { useRef, useState } from 'react';
 import { TextInput, View } from 'react-native';
-import styled from 'styled-components/native';
+
+import { AltLogin } from './Components';
 
 import {
-  Button,
   Container,
   Footer,
   Form,
@@ -14,22 +14,6 @@ import {
 } from 'components';
 import { setAuthenticated, useDispatch } from 'store';
 import { loginValidationSchema as validationSchema } from 'utils';
-import { pallets } from 'constant';
-
-const OrView = styled.View`
-  align-items: center;
-  flex-direction: row;
-  justify-content: space-evenly;
-  margin: 8px 0;
-  width: 100%;
-`;
-
-const Line = styled.View`
-  background-color: ${pallets.black};
-  height: 1px;
-  opacity: 0.5;
-  width: 40%;
-`;
 
 export default function Login(): JSX.Element {
   const [secure, setSecure] = useState(true);
@@ -78,16 +62,7 @@ export default function Login(): JSX.Element {
           />
           <Footer>
             <Submit label="Login" />
-            <OrView>
-              <Line />
-              <Text>OR</Text>
-              <Line />
-            </OrView>
-            <Button
-              variant="outline"
-              label="Continue with Apple"
-              icon="logo-apple"
-            />
+            <AltLogin />
           </Footer>
         </Form>
       </Container>

@@ -4,6 +4,7 @@ export const pallets = {
   border: '#E8E8E8',
   card: '#F3F3F7',
   darkGrey: '#BDBDBD',
+  green: '#34FEB7',
   grey: '#F6F6F6',
   grey2: '#666666',
   inactive: '#E3E3E3',

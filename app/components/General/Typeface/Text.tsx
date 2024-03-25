@@ -34,6 +34,7 @@ export const Text = styled.Text<Props>`
     return fontFamily;
   }};
   font-size: ${props => props.size || fonts.body}px;
+  margin-bottom: ${props => props.marginBottom || 0}px;
   ${props => (props.lineHeight ? `line-height: ${props.lineHeight};` : '')}
   ${props =>
     props.textTransform ? `text-transform: ${props.textTransform};` : ''}

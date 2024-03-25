@@ -30,44 +30,6 @@ interface Props extends TextInputProps {
   onRightIconPress?: () => void;
 }
 
-const Container = styled.View<Props>`
-  background-color: ${pallets.grey};
-  border-color: ${({ disabled, error }) =>
-    disabled ? pallets.inactive : error ? pallets.red : pallets.border};
-  border-radius: ${inputRadius}px;
-  border-width: ${borderWidth}px;
-  flex-direction: row;
-  height: ${height}px;
-  overflow: hidden;
-`;
-
-const StyledInput = styled(TextInput).attrs((props: TextInputProps) => ({
-  placeholderTextColor: props.placeholderTextColor || pallets.darkGrey,
-}))<TextInputProps>`
-  flex: 1;
-  color: ${pallets.text};
-  padding-left: 10px;
-`;
-
-const RightBox = styled.TouchableOpacity`
-  align-items: center;
-  justify-content: center;
-  overflow: hidden;
-  padding-right: 10px;
-`;
-
-const ErrorMessageContainer = styled.View<Props>`
-  align-items: center;
-  flex-direction: row;
-  margin-bottom: ${({ marginBottom }) => marginBottom}px;
-  margin-top: ${({ noteVisible, error }) => (noteVisible || error ? 5 : 0)}px;
-`;
-
-const ErrorMessageView = styled.View`
-  align-items: flex-end;
-  flex: 1;
-`;
-
 const FormInput = forwardRef<TextInput, Props>(
   (
     {
@@ -84,14 +46,16 @@ const FormInput = forwardRef<TextInput, Props>(
       onRightIconPress,
       noteVisible,
       placeholder,
+      multiline,
       ...props
     },
     ref,
   ) => (
     <>
-      <Container disabled={disabled} error={error}>
+      <Container disabled={disabled} error={error} multiline={multiline}>
         <StyledInput
           editable={!disabled}
+          multiline={multiline}
           placeholder={placeholder}
           placeholderTextColor={placeholderColor || pallets.darkGrey}
           onChangeText={onChangeText}
@@ -127,5 +91,44 @@ const FormInput = forwardRef<TextInput, Props>(
     </>
   ),
 );
+
+const Container = styled.View<Props>`
+  background-color: ${pallets.grey};
+  border-color: ${({ disabled, error }) =>
+    disabled ? pallets.inactive : error ? pallets.red : pallets.border};
+  border-radius: ${inputRadius}px;
+  border-width: ${borderWidth}px;
+  flex-direction: row;
+  min-height: ${({ multiline }) => (multiline ? height * 1.5 : height)}px;
+  overflow: hidden;
+`;
+
+const StyledInput = styled(TextInput).attrs((props: TextInputProps) => ({
+  placeholderTextColor: props.placeholderTextColor || pallets.darkGrey,
+}))<TextInputProps>`
+  flex: 1;
+  color: ${pallets.text};
+  padding-left: 10px;
+  min-height: ${({ multiline }) => (multiline ? height * 2 : height)}px;
+`;
+
+const RightBox = styled.TouchableOpacity`
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  padding-right: 10px;
+`;
+
+const ErrorMessageContainer = styled.View<Props>`
+  align-items: center;
+  flex-direction: row;
+  margin-bottom: ${({ marginBottom }) => marginBottom}px;
+  margin-top: ${({ noteVisible, error }) => (noteVisible || error ? 5 : 0)}px;
+`;
+
+const ErrorMessageView = styled.View`
+  align-items: flex-end;
+  flex: 1;
+`;
 
 export default FormInput;

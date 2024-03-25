@@ -17,12 +17,6 @@ interface Props {
   label: string;
 }
 
-// Styled-components
-const Container = styled.TouchableOpacity`
-  align-items: center;
-  flex-direction: row;
-`;
-
 export default function FormCheck({ label, name }: Props): JSX.Element | null {
   const { setFieldTouched, setFieldValue, values, errors } =
     useFormikContext<CheckFieldKeys>();
@@ -54,3 +48,9 @@ export default function FormCheck({ label, name }: Props): JSX.Element | null {
     </Container>
   );
 }
+
+// Styled-components
+const Container = styled.TouchableOpacity`
+  align-items: center;
+  flex-direction: row;
+`;

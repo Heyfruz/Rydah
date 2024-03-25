@@ -7,6 +7,8 @@ const small = width >= 325 && width < 350;
 const medium = width >= 350 && width < 450;
 const large = width >= 450;
 
+const padding = small ? 14 : 16;
+
 export default {
   button: {
     height: 51,
@@ -18,6 +20,11 @@ export default {
   cards: {
     cardHeight: 65,
     cardRadius: 8,
+    categoryHeight: height * 0.125,
+    categoryWidth: (width - 16) * 0.65,
+    productHeight: height * 0.2,
+    productWidth: (width - 16) * 0.4,
+    productWidthLarge: width - 16 * 2,
   },
   dimension: {
     isLandscape: height < width,
@@ -52,9 +59,10 @@ export default {
   spacing: {
     l: 24,
     m: 16,
-    padding: small ? 14 : 16,
+    padding,
     r: 20,
     s: 8,
+    width: width - padding * 2,
     xl: 32,
     xl2: 32 * 2,
     xs: 4,

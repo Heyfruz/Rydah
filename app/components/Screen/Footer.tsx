@@ -23,16 +23,7 @@ interface FooterProps {
   paddingBottom?: number;
 }
 
-// StyledFooter replaces the View component, directly incorporating style props
-const StyledFooter = styled.View<FooterProps>`
-  flex: ${({ flex }) => flex ?? 1};
-  width: 100%;
-  align-items: ${({ alignItems }) => alignItems ?? 'stretch'};
-  justify-content: ${({ justifyContent }) => justifyContent ?? 'flex-end'};
-  padding-bottom: ${({ paddingBottom }) => paddingBottom ?? 0}px;
-`;
-
-function Footer({
+export default function Footer({
   children,
   style,
   alignItems,
@@ -52,4 +43,11 @@ function Footer({
   );
 }
 
-export default Footer;
+// StyledFooter View component, directly incorporating style props
+const StyledFooter = styled.View<FooterProps>`
+  flex: ${({ flex }) => flex ?? 1};
+  width: 100%;
+  align-items: ${({ alignItems }) => alignItems ?? 'stretch'};
+  justify-content: ${({ justifyContent }) => justifyContent ?? 'flex-end'};
+  padding-bottom: ${({ paddingBottom }) => paddingBottom ?? 0}px;
+`;

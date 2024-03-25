@@ -34,46 +34,6 @@ interface TouchableProps {
   children: JSX.Element;
 }
 
-// Styled container replacing View
-const StyledContainer = styled.View<ButtonProps>`
-  align-items: center;
-  justify-content: center;
-  overflow: hidden;
-  width: 100%;
-  height: ${button.height}px;
-`;
-
-// Styled control replacing View with style control
-const StyledControl = styled.View<ButtonProps>`
-  align-self: center;
-  border-radius: ${button.radius2}px;
-  background-color: ${({ variant, color, disabled, isLoading }) => {
-    if (disabled || isLoading) {
-      return variant === 'transparent' ? pallets.transparent : pallets.grey;
-    }
-    switch (variant) {
-      case 'secondary':
-        return color || pallets.white;
-      case 'transparent':
-        return pallets.transparent;
-      case 'outline':
-        return pallets.transparent;
-      default:
-        return pallets.primary;
-    }
-  }};
-  border-color: ${({ variant, color }) =>
-    variant === 'outline' ? color || pallets.primary : 'transparent'};
-  border-width: ${({ variant }) => (variant === 'outline' ? 1.5 : 0)}px;
-  opacity: ${({ disabled }) => (disabled ? 0.8 : 1)};
-  margin-bottom: ${({ marginBottom }) => marginBottom || 0}px;
-  width: ${({ width }) => width || '100%'};
-`;
-
-const StyledTouchableOpacity = styled.TouchableOpacity`
-  width: 100%;
-`;
-
 function Button({
   disabled: buttonDisabled,
   label,
@@ -162,5 +122,45 @@ function Button({
     </StyledControl>
   );
 }
+
+// Styled container view
+const StyledContainer = styled.View<ButtonProps>`
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  width: 100%;
+  height: ${button.height}px;
+`;
+
+// Styled control with style control
+const StyledControl = styled.View<ButtonProps>`
+  align-self: center;
+  border-radius: ${button.radius2}px;
+  background-color: ${({ variant, color, disabled, isLoading }) => {
+    if (disabled || isLoading) {
+      return variant === 'transparent' ? pallets.transparent : pallets.grey;
+    }
+    switch (variant) {
+      case 'secondary':
+        return color || pallets.white;
+      case 'transparent':
+        return pallets.transparent;
+      case 'outline':
+        return pallets.transparent;
+      default:
+        return pallets.primary;
+    }
+  }};
+  border-color: ${({ variant, color }) =>
+    variant === 'outline' ? color || pallets.primary : 'transparent'};
+  border-width: ${({ variant }) => (variant === 'outline' ? 1.5 : 0)}px;
+  opacity: ${({ disabled }) => (disabled ? 0.8 : 1)};
+  margin-bottom: ${({ marginBottom }) => marginBottom || 0}px;
+  width: ${({ width }) => width || '100%'};
+`;
+
+const StyledTouchableOpacity = styled.TouchableOpacity`
+  width: 100%;
+`;
 
 export default React.memo(Button);

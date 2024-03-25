@@ -9,6 +9,11 @@ export interface FieldKeys {
   email: string;
   name: string;
   password: string;
+  category: string;
+  description: string;
+  imageUrl: string;
+  price: string;
+  sellerLocation: string;
 }
 
 type IconName = Pick<React.ComponentProps<typeof Icon>, 'name'>['name'];
@@ -24,6 +29,7 @@ interface FormFieldProps extends TextInputProps {
   onRightLabelPress?: () => void;
   rightIcon?: IconName;
   onRightIconPress?: () => void;
+  multiline?: boolean;
 }
 
 const FormField = forwardRef<TextInput, FormFieldProps>(
@@ -38,6 +44,7 @@ const FormField = forwardRef<TextInput, FormFieldProps>(
       onRightLabelPress,
       rightIcon,
       onRightIconPress,
+      multiline,
       rightLabel,
       ...props
     }: FormFieldProps,
@@ -68,6 +75,7 @@ const FormField = forwardRef<TextInput, FormFieldProps>(
           onSubmitEditing={() => handleSubmit()}
           errorMessage={errors[name]}
           value={values[name]}
+          multiline={multiline}
           {...{
             disabled,
             error,

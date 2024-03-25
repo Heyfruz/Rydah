@@ -1,8 +1,9 @@
 import { useRef, useState } from 'react';
 import { TextInput, View } from 'react-native';
 
+import { AltLogin } from './Components';
+
 import {
-  Button,
   Container,
   Footer,
   Form,
@@ -26,9 +27,16 @@ export default function Register({
 
   return (
     <>
-      <Header hideLeftComp title="Register" />
+      <Header
+        hideLeftComp
+        title=""
+        rightLabel="Login"
+        onRightLabelPress={() => navigation.navigate('Login')}
+      />
       <Container>
-        <Text>Enter your email</Text>
+        <Text size={24} variant="600">
+          We are so excited to {'\n'}have you join us!
+        </Text>
         <Form
           {...{ validationSchema }}
           initialValues={{
@@ -75,11 +83,7 @@ export default function Register({
           <View style={{ height: 32 }} />
           <Footer>
             <Submit label="Sign Up" />
-            <Button
-              variant="transparent"
-              label="Already have an account? Log in"
-              onPress={() => navigation.navigate('Login')}
-            />
+            <AltLogin />
           </Footer>
         </Form>
       </Container>

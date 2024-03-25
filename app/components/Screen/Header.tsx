@@ -16,6 +16,10 @@ interface Props {
   hideLeftComp?: boolean;
   itemColor?: string;
   leftLabel?: string;
+  leftLabelOption?: {
+    variant: Pick<React.ComponentProps<typeof Text>, 'variant'>['variant'];
+    size: number;
+  };
   onLeftLabelPress?: () => void;
   onRightLabelPress?: () => void;
   rightLabel?: string;
@@ -23,14 +27,20 @@ interface Props {
   title: string;
 }
 
-interface BackProps {
+type ExtendedProps = Pick<
+  Props,
+  | 'handleCloseIcon'
+  | 'hideLeftComp'
+  | 'itemColor'
+  | 'leftLabel'
+  | 'leftLabelOption'
+  | 'onLeftLabelPress'
+  | 'showCloseIcon'
+>;
+
+interface BackProps extends ExtendedProps {
   canGoBack: boolean;
   handleBack: () => void;
-  handleCloseIcon?: () => void;
-  hideLeftComp?: boolean;
-  itemColor?: string;
-  leftLabel?: string;
-  onLeftLabelPress?: () => void;
   showCloseIcon?: boolean;
 }
 
@@ -63,7 +73,8 @@ const HeaderContent = styled.View<{
   flex-direction: row;
   background-color: ${({ backgroundColor }) => backgroundColor};
   height: ${({ headerHeight, insetsTop }) => headerHeight - insetsTop}px;
-  /* padding-horizontal: ${({ paddingHorizontal }) => paddingHorizontal}px; */
+  border-bottom-width: 0.5px;
+  border-bottom-color: ${pallets.border};
 `;
 
 const HeaderActions = styled.View`
@@ -99,6 +110,7 @@ export default function Header({
   onLeftLabelPress,
   backgroundColor,
   onRightLabelPress,
+  leftLabelOption,
 }: Props): JSX.Element {
   const { insets, headerHeight } = useHeaderHeight();
   const navigation = useNavigation();
@@ -116,21 +128,24 @@ export default function Header({
         paddingHorizontal={spacing.padding}>
         <HeaderActions>
           <Back
-            canGoBack={canGoBack}
-            handleBack={handleBack}
-            handleCloseIcon={handleCloseIcon}
-            hideLeftComp={hideLeftComp}
-            itemColor={itemColor}
-            leftLabel={leftLabel}
-            onLeftLabelPress={onLeftLabelPress}
-            showCloseIcon={showCloseIcon}
+            {...{
+              canGoBack,
+              handleBack,
+              handleCloseIcon,
+              hideLeftComp,
+              itemColor,
+              leftLabel,
+              leftLabelOption,
+              onLeftLabelPress,
+              showCloseIcon,
+            }}
           />
           {Boolean(rightLabel) && (
             <TouchableOpacity activeOpacity={0.7} onPress={onRightLabelPress}>
               <Text
-                variant="500"
+                variant="600"
                 size={fonts.subhead}
-                color={itemColor || pallets.primary}>
+                color={itemColor || pallets.text}>
                 {rightLabel || 'Go'}
               </Text>
             </TouchableOpacity>
@@ -155,6 +170,7 @@ const Back = ({
   itemColor,
   onLeftLabelPress,
   leftLabel,
+  leftLabelOption,
 }: BackProps): JSX.Element => {
   if (hideLeftComp) {
     return <View />;
@@ -164,8 +180,8 @@ const Back = ({
     return (
       <BackTouchable activeOpacity={0.7} onPress={onLeftLabelPress}>
         <Text
-          variant="500"
-          size={fonts.subhead}
+          variant={leftLabelOption?.variant || '500'}
+          size={leftLabelOption?.size || fonts.subhead}
           color={itemColor || pallets.primary}>
           {leftLabel}
         </Text>

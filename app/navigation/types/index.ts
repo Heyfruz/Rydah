@@ -28,6 +28,7 @@ export interface RootNavigationProp<
 
 export type AppRoutes = {
   Tab: NavigatorScreenParams<TabRoutes>;
+  DashboardStack: NavigatorScreenParams<DashboardRoutes>;
 };
 
 export type TabRoutes = {
@@ -39,4 +40,9 @@ export type TabRoutes = {
 export type AuthRoutes = {
   Login: undefined;
   Register: undefined;
+};
+
+export type DashboardRoutes = {
+  Product: { product: Product };
+  Success: { action: 'purchase' | 'sell' };
 };
