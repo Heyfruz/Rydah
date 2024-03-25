@@ -1,4 +1,5 @@
 import styled from 'styled-components/native';
+import { Feather as Icon } from '@expo/vector-icons';
 
 import { Text } from '../General';
 
@@ -19,12 +20,17 @@ export default function Category({
 }: Props): JSX.Element | null {
   return (
     <CategoryContainer {...{ marginRight, onPress }}>
-      <StyledImage source={{ uri: category.imageUrl }} />
-      <Overlay>
-        <Text color={pallets.primary} variant="700" textTransform="uppercase">
-          {category.name}
-        </Text>
-      </Overlay>
+      <DetailsContainer>
+        <StyledImage source={{ uri: category.imageUrl }} />
+        <Overlay>
+          <Text color={pallets.primary} variant="700" textTransform="uppercase">
+            {category.name}
+          </Text>
+        </Overlay>
+      </DetailsContainer>
+      <PlaceholderImage>
+        <Icon name="image" color={pallets.primary} size={32} />
+      </PlaceholderImage>
     </CategoryContainer>
   );
 }
@@ -40,6 +46,19 @@ const CategoryContainer = styled.TouchableOpacity<CategoryContainerProps>`
   overflow: hidden;
 `;
 
+const PlaceholderImage = styled.View`
+  width: ${cards.categoryWidth}px;
+  height: ${cards.categoryHeight}px;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  align-items: center;
+  justify-content: center;
+  background-color: ${pallets.grey};
+`;
+
 const StyledImage = styled.Image`
   flex: 1;
 `;
@@ -53,4 +72,9 @@ const Overlay = styled.View`
   align-items: center;
   justify-content: center;
   background-color: #00000066;
+`;
+
+const DetailsContainer = styled.View`
+  z-index: 1;
+  flex: 1;
 `;

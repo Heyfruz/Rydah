@@ -1,8 +1,9 @@
 import styled from 'styled-components/native';
+import { Feather as Icon } from '@expo/vector-icons';
 
 import { Text } from '../General';
 
-import { layout } from 'constant';
+import { layout, pallets } from 'constant';
 import { formatCurrency } from 'utils';
 
 interface Props {
@@ -23,7 +24,12 @@ export default function Product({
   if (variant === 'small') {
     return (
       <ProductContainer marginRight={marginRight} onPress={onPress}>
-        <StyledImage source={{ uri: product.imageUrl }} />
+        <ImageContainer>
+          <StyledImage source={{ uri: product.imageUrl }} />
+          <PlaceholderImage>
+            <Icon name="image" color={pallets.primary} size={32} />
+          </PlaceholderImage>
+        </ImageContainer>
         <Description>
           <Text marginBottom={2}>{product.name}</Text>
           <Text size={12} numberOfLines={1} variant="600">
@@ -36,7 +42,12 @@ export default function Product({
 
   return (
     <ProductContainerLarge marginRight={marginRight} onPress={onPress}>
-      <StyledImageLarge source={{ uri: product.imageUrl }} />
+      <ImageContainerLarge>
+        <StyledImageLarge source={{ uri: product.imageUrl }} />
+        <PlaceholderImageLarge>
+          <Icon name="image" color={pallets.primary} size={32} />
+        </PlaceholderImageLarge>
+      </ImageContainerLarge>
       <Description>
         <TitleRow>
           <Text>{product.name}</Text>
@@ -69,8 +80,7 @@ const ProductContainerLarge = styled.TouchableOpacity<ProductContainerProps>`
 const StyledImage = styled.Image`
   width: '100%';
   height: ${cards.productHeight}px;
-  border-radius: 4px;
-  margin-bottom: 8px;
+  z-index: 1;
 `;
 
 const StyledImageLarge = styled.Image`
@@ -78,6 +88,7 @@ const StyledImageLarge = styled.Image`
   height: ${cards.productWidthLarge}px;
   border-radius: 4px;
   margin-bottom: 8px;
+  z-index: 1;
 `;
 
 const Description = styled.View``;
@@ -86,4 +97,46 @@ const TitleRow = styled.View`
   flex-direction: row;
   justify-content: space-between;
   margin-bottom: 2px;
+`;
+
+const PlaceholderImage = styled.View`
+  width: '100%';
+  height: ${cards.productHeight}px;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  align-items: center;
+  justify-content: center;
+  background-color: ${pallets.grey};
+`;
+
+const PlaceholderImageLarge = styled.View`
+  width: '100%';
+  height: ${cards.productWidthLarge}px;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  align-items: center;
+  justify-content: center;
+  background-color: ${pallets.grey};
+`;
+
+const ImageContainer = styled.View`
+  width: '100%';
+  height: ${cards.productHeight}px;
+  border-radius: 4px;
+  margin-bottom: 8px;
+  overflow: hidden;
+`;
+
+const ImageContainerLarge = styled.View`
+  width: '100%';
+  height: ${cards.productWidthLarge}px;
+  border-radius: 4px;
+  margin-bottom: 8px;
+  overflow: hidden;
 `;

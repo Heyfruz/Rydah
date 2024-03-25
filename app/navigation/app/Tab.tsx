@@ -26,12 +26,12 @@ export default function Tab(): JSX.Element {
               variant={focused ? '600' : '300'}
               size={12}
               color={color}
-              style={[Platform.OS === 'android' ? { padding: 10 } : {}]}>
+              style={[Platform.OS === 'android' ? { paddingBottom: 4 } : {}]}>
               {route.name}
             </Text>
           );
         },
-        tabBarStyle: [Platform.OS === 'android' && { height: 60, padding: 10 }],
+        tabBarStyle: [Platform.OS === 'android' && { height: 64, padding: 4 }],
       })}>
       <Screen name="Dashboard" component={Dashboard} />
       <Screen name="Sell" component={Sell} />
