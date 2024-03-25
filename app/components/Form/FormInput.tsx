@@ -110,6 +110,7 @@ const StyledInput = styled(TextInput).attrs((props: TextInputProps) => ({
   color: ${pallets.text};
   padding-left: 10px;
   min-height: ${({ multiline }) => (multiline ? height * 2 : height)}px;
+  font-family: 'SpaceGrotesk-Regular';
 `;
 
 const RightBox = styled.TouchableOpacity`
